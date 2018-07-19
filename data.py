@@ -121,6 +121,5 @@ with open('Exam.txt', 'a+', encoding='utf-8') as f:
                     '\n' +
                     str(Currect[k]) +
                     '\n\n')
-            f.close()
     except Exception:
         pass
