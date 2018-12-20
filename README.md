@@ -12,20 +12,17 @@
 `pip install requests`
   
 `pip install lxml`
-  
-`pip install tqdm`
 
 ----
-若无法安装tqdm请修改`tqdm.trange(len(urls))`为`range(len(urls))`
 
-请检查代码根目录下是否有data文件夹
+输入账号和密码及待爬取的课程网页即可使用
 
-修改url及cookies参数后运行data.py进行爬取，得到txt文件即为班课中题目及答案
+**请务必查看环境是否需要使用代理！！！**
 
-请自行调整格式
+本程序已构建可执行exe文件
 
 ----
 
 待解决问题：
 
--将题目以首字母拼音升序排列
+将题目以首字母拼音升序排列(拟用pypinyin库构建)
