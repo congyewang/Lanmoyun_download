@@ -5,21 +5,42 @@ import re
 
 class Toolbox:
 
-    def __init__(self, url: str, headers: dict, cookies: dict):
+    def __init__(self, username: str, password: str, url: str, cookies=None):
+        self.login_url = 'https://www.mosoteach.cn/web/index.php?c=passport&m=account_login'
         self.url = url
-        self.headers = headers
+        self.username = username
+        self.password = password
+        self.s = requests.Session()
+        self.headers = {
+        'Host': 'www.mosoteach.cn',
+        'Connection': 'keep-alive',
+        'Cache-Control': 'max-age=0',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Language': 'zh-CN,zh;q=0.9'
+        }
         self.cookies = cookies
 
-    def get_url(self, path: str, title: str) ->list:
+    def login(self):
         proxies = {"http": "http://127.0.0.1:1087",
                    "https": "https://127.0.0.1:1087",
-                   }
+        }
+        data = {
+            "account_name": self.username,
+            "user_pwd":  self.password,
+            "remember_me": "N"
+        }
+        sess = self.s.post(url=self.login_url, data=data, headers=self.headers, proxies=proxies, timeout=500)
+        return dict(sess.cookies)
+
+    def get_url(self, path: str, title: str) ->list:
         r = requests.get(
             self.url,
             headers=self.headers,
             cookies=self.cookies,
-            proxies=proxies,
-            timeout=200)
+            timeout=500)
         html = etree.HTML(r.text)
         data_id = html.xpath(path)
         tit = html.xpath(title)
@@ -29,15 +50,11 @@ class Toolbox:
         return links, tit
 
     def get_data(self, url: str, path: str) ->list:
-        proxies = {"http": "http://127.0.0.1:1087",
-                   "https": "https://127.0.0.1:1087",
-                   }
         r = requests.get(
             url,
             headers=self.headers,
             cookies=self.cookies,
-            proxies=proxies,
-            timeout=200)
+            timeout=500)
         html = etree.HTML(r.text)
         try:
             result = html.xpath(path)
@@ -70,15 +87,11 @@ class Toolbox:
         return s
 
     def get_txt(self, url: str) ->list:
-        proxies = {"http": "http://127.0.0.1:1087",
-                   "https": "https://127.0.0.1:1087",
-                   }
         r = requests.get(
             url,
             headers=self.headers,
             cookies=self.cookies,
-            proxies=proxies,
-            timeout=200)
+            timeout=500)
         html = etree.HTML(r.text)
         title = []
         ans_sum = []
