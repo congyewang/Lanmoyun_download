@@ -36,6 +36,8 @@ class Toolbox:
         return dict(sess.cookies)
 
     def get_url(self, path: str, title: str) ->list:
+        clazz_course_id = re.search('(clazz_course_id=).+', self.url).group().replace(
+            'clazz_course_id=', '')
         r = requests.get(
             self.url,
             headers=self.headers,
@@ -44,7 +46,7 @@ class Toolbox:
         html = etree.HTML(r.text)
         data_id = html.xpath(path)
         tit = html.xpath(title)
-        links = [f'https://www.mosoteach.cn/web/index.php?c=interaction_quiz&m=person_quiz_result&clazz_course_id=01529E8B-A300-11E8-AA22-7CD30AD36C02&id={i}&order_item=group&user_id=F3E8D24D-A848-11E7-AA22-7CD30AD36C02'
+        links = [f'https://www.mosoteach.cn/web/index.php?c=interaction_quiz&m=person_quiz_result&clazz_course_id={clazz_course_id}&id={i}&order_item=group&user_id=F3E8D24D-A848-11E7-AA22-7CD30AD36C02'
                  for i in data_id]
 
         return links, tit
