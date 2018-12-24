@@ -1,6 +1,7 @@
 import requests
 from lxml import etree
 import re
+import difflib
 
 
 class Toolbox:
@@ -109,3 +110,23 @@ class Toolbox:
         except Exception:
             pass
         return title, ans_sum, curr
+
+    def check_diff(n1: str, n2: str, choose='txt') -> str:
+        with open(n1, 'r') as f1:
+            s1 = f1.read()
+        with open(n2, 'r') as f2:
+            s2 = f2.read()
+        text1_line = s1.splitlines()
+        text2_line = s2.splitlines()
+        if choose == 'txt':
+            d = difflib.Differ()
+            a = d.compare(text1_line, text2_line)
+            a = list(a)
+            with open(f"diff.txt") as f:
+                f.write('\n'.join(list(a)))
+        elif choose == 'html':
+            d = difflib.HtmlDiff()
+            with open('diff.html', 'w+') as f:
+                f.write(d.make_file(text1_line, text2_line))
+        else:
+            print('choose value error, input "txt" or "html"')
