@@ -1,5 +1,7 @@
 from toolbox import *
 import time
+import tqdm
+
 
 if __name__ == '__main__':
 
@@ -15,10 +17,10 @@ if __name__ == '__main__':
     urls, tit = fin_man.get_url(path, tit)
 
     s = 0
-    for k in range(len(urls)):
+    for k in tqdm.trange(len(urls)):
         title, ans_sum, curr = fin_man.get_txt(urls[k])
         time.sleep(int(tit))
-        print(f'{k / len(urls) * 100:.2f}%')
+        # print(f'{k / len(urls) * 100:.2f}%')
         try:
             with open(f'data.txt', 'a+') as f:
                 for i in range(len(title)):

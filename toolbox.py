@@ -2,6 +2,7 @@ import requests
 from lxml import etree
 import re
 import difflib
+from fake_useragent import UserAgent
 
 
 class Toolbox:
@@ -13,27 +14,25 @@ class Toolbox:
         self.password = password
         self.s = requests.Session()
         self.headers = {
-        'Host': 'www.mosoteach.cn',
-        'Connection': 'keep-alive',
-        'Cache-Control': 'max-age=0',
-        'Upgrade-Insecure-Requests': '1',
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'zh-CN,zh;q=0.9'
+            'Host': 'www.mosoteach.cn',
+            'Connection': 'keep-alive',
+            'Cache-Control': 'max-age=0',
+            'Upgrade-Insecure-Requests': '1',
+            'User-Agent': UserAgent().random,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'zh-CN,zh;q=0.9'
         }
         self.cookies = cookies
 
     def login(self):
-        proxies = {"http": "http://127.0.0.1:1087",
-                   "https": "https://127.0.0.1:1087",
-        }
         data = {
             "account_name": self.username,
             "user_pwd":  self.password,
             "remember_me": "N"
         }
-        sess = self.s.post(url=self.login_url, data=data, headers=self.headers, proxies=proxies, timeout=500)
+        sess = self.s.post(url=self.login_url, data=data,
+                           headers=self.headers, timeout=500)
         return dict(sess.cookies)
 
     def get_url(self, path: str, title: str) ->list:
