@@ -121,7 +121,7 @@ class Toolbox:
             d = difflib.Differ()
             a = d.compare(text1_line, text2_line)
             a = list(a)
-            with open(f"diff.txt") as f:
+            with open(f"diff.txt", "w+") as f:
                 f.write('\n'.join(list(a)))
         elif choose == 'html':
             d = difflib.HtmlDiff()
