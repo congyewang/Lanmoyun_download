@@ -22,11 +22,15 @@
 
 ----
 
+#注意事项
+
 输入账号和密码及待爬取的课程网页即可使用, sleep参数没有默认值, 建议为2
 
 **请务必查看环境是否需要使用代理！！！视情况更改requests.get的proxy参数！！！**
 
 本程序已构建可执行exe文件
+
+Lanmoyun_scrapy框架还未填充完善, 请勿作为直接结果, 如需测试请运行start.py
 
 ----
 
@@ -44,6 +48,8 @@
 
 6.tqdm加入进度条
 
+7.初步构建Scrapy框架下的爬虫
+
 ----
 
 #待解决问题：
@@ -51,3 +57,5 @@
 1.将题目以首字母拼音升序排列(拟用pypinyin库构建)
 
 2.改用asyncio + aiohttp + ThreadPoolExecutor进行高并发多线程爬取
+
+3.完善Lanmoyun_scrapy
