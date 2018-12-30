@@ -1,6 +1,6 @@
 from scrapy.spiders import Spider
 from Lanmoyun_scrapy.items import LanmoyunScrapyItem
-# from lanmoyun_scra.spiders.toolbox import *
+from lxml import etree
 
 
 class LanmoyunSpider(Spider):
@@ -34,14 +34,15 @@ class LanmoyunSpider(Spider):
 
     def parse(self, response):
         item = LanmoyunScrapyItem()
-        totels = response.xpath(r'/html/body/div[3]/div[2]/div[4]/div')
+        html = etree.HTML(response.text)
         try:
-            for totel in totels:
-                item['title'] = totel.xpath('./div[1]/div/div[1]/div/div[3]/pre/text()').extract()[0]
-                item['curr'] = totel.xpath('./div[2]/div[1]/div[1]/span/text()').extract()[0]
-                divs = totel.xpath('./div[1]/div/div[3]/div')
-                for div in divs:
-                    item['ans_sum'] = div.xpath('./span[3]/text()').extract()[0]
+            for i in range(len(html.xpath('/html/body/div[3]/div[2]/div[4]/div'))):
+                item['title'] = html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[1]/div/div[3]/pre/text()')
+                ans = []
+                for j in range(len(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div'))):
+                    ans.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div[{j + 1}]/span[3]/text()'))
+                item['ans_sum'] = ans
+                item['curr'] = html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[2]/div[1]/div[1]/span/text()')
         except Exception:
             pass
         yield item
