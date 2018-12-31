@@ -8,7 +8,7 @@ import time
 
 class RunSpiders:
     def RunCommand(self, spider):
-        os.system("scrapy crawl %s" % spider)
+        os.system(f"scrapy crawl {spider}")
 
 
 class Toolbox:

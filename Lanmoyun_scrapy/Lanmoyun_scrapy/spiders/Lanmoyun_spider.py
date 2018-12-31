@@ -1,6 +1,6 @@
 from scrapy.spiders import Spider
 from Lanmoyun_scrapy.items import LanmoyunScrapyItem
-from lxml import etree
+# from lxml import etree
 
 
 class LanmoyunSpider(Spider):
@@ -34,15 +34,13 @@ class LanmoyunSpider(Spider):
 
     def parse(self, response):
         item = LanmoyunScrapyItem()
-        html = etree.HTML(response.text)
-        try:
-            for i in range(len(html.xpath('/html/body/div[3]/div[2]/div[4]/div'))):
-                item['title'] = html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[1]/div/div[3]/pre/text()')
-                ans = []
-                for j in range(len(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div'))):
-                    ans.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div[{j + 1}]/span[3]/text()'))
-                item['ans_sum'] = ans
-                item['curr'] = html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[2]/div[1]/div[1]/span/text()')
-        except Exception:
-            pass
-        yield item
+        txt = response.xpath('//div[@id="cc-main"]')
+        for i in txt:
+            item['title'] = i.xpath(
+                './div[@style="padding:40px 20px 20px;"]/div[4]/div//pre[@class="color-33 topic-subject"]/text()').extract()
+            item['ans_sum'] = i.xpath(
+                './/span[@class="person-result-answer"]/text()').extract()
+            item['curr'] = i.xpath(
+                './/div[@class="true-rate"]/div[1]/div[1]/span[@style="color:#07AC6C;"]/text()'
+            ).extract()
+            yield item
