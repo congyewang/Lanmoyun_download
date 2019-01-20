@@ -108,3 +108,5 @@ venv.bak/
 
 #file
 .txt
+.csv
+Lanmoyun_scrapy/*.txt

@@ -33,14 +33,31 @@ class LanmoyunSpider(Spider):
 
 
     def parse(self, response):
+        # 实例化容器
         item = LanmoyunScrapyItem()
-        txt = response.xpath('//div[@id="cc-main"]')
-        for i in txt:
-            item['title'] = i.xpath(
-                './div[@style="padding:40px 20px 20px;"]/div[4]/div//pre[@class="color-33 topic-subject"]/text()').extract()
-            item['ans_sum'] = i.xpath(
-                './/span[@class="person-result-answer"]/text()').extract()
-            item['curr'] = i.xpath(
-                './/div[@class="true-rate"]/div[1]/div[1]/span[@style="color:#07AC6C;"]/text()'
-            ).extract()
-            yield item
+        # 获取总数
+        txt = response.xpath('//div[@id="cc-main"]/div[@style="padding:40px 20px 20px;"]/div[4]/div')
+        # 创建变量容器
+        title = []
+        ans_sum = []
+        curr = []
+        # 读取每题位置
+        for i in range(len(txt)):
+            title.append(txt[i].xpath(
+                './/pre[@class="color-33 topic-subject"]/text()').extract())
+
+            curr.append(txt[i].xpath(
+                './/div[@class="true-rate"]//span[@style="color:#07AC6C;"]/text()'
+            ).extract())
+            # 读取各选项
+            ans = []
+            t1 = txt[i].xpath('//div[@class="option-content"]')
+            for j in range(len(t1)):
+                ans.append(t1[j].xpath(
+                    './/span[@class="person-result-answer"]/text()').extract())
+            ans_sum.append(ans)
+        # 保存至实例化容器
+        item['title'] = title
+        item['ans_sum'] = ans_sum
+        item['curr'] = curr
+        yield item

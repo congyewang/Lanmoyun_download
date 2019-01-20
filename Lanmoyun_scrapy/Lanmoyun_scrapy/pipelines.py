@@ -16,14 +16,13 @@ class LanmoyunScrapyPipeline(object):
         ans_sum = item["ans_sum"]
         curr = item["curr"]
         global s
-        # for i in range(len(title)):
-        #     s = s + 1
-        #     self.file.write(f'{s}、{title[i]}\n')
-        #     for j in range(len(ans_sum[i])):
-        #         self.file.write(f'{chr(65 + j)}、{ans_sum[i][j]}\n')
-        #         self.file.write(f'{"".join(curr[i])}\n\n')
-        for i in title:
-            self.file.write(f'{i}\n')
+        for i in range(len(title)):
+            for j in range(len(title[i])):
+                s = s + 1
+                self.file.write(f'{s}、{title[i][j][0]}\n')
+                for k in range(len(ans_sum[i][j])):
+                    self.file.write(f'{chr(65 + k)}、{ans_sum[i][j][k]}\n')
+                    self.file.write(f'{"".join(curr[i][j][k])}\n\n')
 
     def open_spider(self, spider):
         pass
