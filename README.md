@@ -30,7 +30,7 @@
 
 本程序已构建可执行exe文件
 
-Lanmoyun_scrapy框架还未填充完善, 请勿作为直接结果, 如需测试请运行start.py
+Lanmoyun_scrapy框架已完善, 请先修改start.py中的url及cookie, 然后修改Lanmoyun_scrapy中的settings.py中的DEFAULT_REQUEST_HEADERS, 最后运行start.py
 
 ----
 
@@ -48,7 +48,7 @@ Lanmoyun_scrapy框架还未填充完善, 请勿作为直接结果, 如需测试�
 
 6.tqdm加入进度条
 
-7.初步构建Scrapy框架下的爬虫
+7.完善Lanmoyun_scrapy
 
 ----
 
@@ -57,5 +57,3 @@ Lanmoyun_scrapy框架还未填充完善, 请勿作为直接结果, 如需测试�
 1.将题目以首字母拼音升序排列(拟用pypinyin库构建)
 
 2.改用asyncio + aiohttp + ThreadPoolExecutor进行高并发多线程爬取
-
-3.完善Lanmoyun_scrapy

@@ -19,7 +19,10 @@ class Toolbox:
 
     def get_url(self, path: str) ->list:
         clazz_course_id = re.search(
-            '(clazz_course_id=).+', self.url).group().replace('clazz_course_id=', '')
+            '(clazz_course_id=).+',
+            self.url).group().replace(
+            'clazz_course_id=',
+            '')
         proxies = {"http": "http://127.0.0.1:1080",
                    "https": "https://127.0.0.1:1080",
                    }
@@ -131,7 +134,7 @@ class Toolbox:
 
 if __name__ == '__main__':
     tic = time.time()
-    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=0D5BF5CA-EBF3-11E8-832A-EC0D9ACEE976'
+    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=D654668D-8B2C-11E7-8560-7CD30ABC9F86'
     headers = {
         'Host': 'www.mosoteach.cn',
         'Connection': 'keep-alive',
@@ -146,11 +149,11 @@ if __name__ == '__main__':
         '_uab_collina': '154280184098098822088961',
         'UM_distinctid': '165ea9955f7140-072e1f8bdbdb38-1130685c-fa000-165ea9955f8496',
         '_ga': 'GA1.2.432290112.1544065307',
-        'CNZZDATA1253495893': '230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1545308245',
-        'aliyungf_tc': 'AQAAADcdTxq9eQgAv7Mpb39/px3ta5gu',
-        'mosoteach2': '118142e8d352a546e4baec54935aa2b58c1e99f9',
-        'login_token': '7bdb40fd83f6e411295f2e58767b510788c1668992456f5a3bcf026dbfdbe5e1',
-        'SERVERID': '85f2f94ec6c34af49bb881648f0847ac|1545308870|1545308839'}
+        'CNZZDATA1253495893': '230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1546938426',
+        'aliyungf_tc': 'AQAAAFkerBm/sggA9oGmezpKlyuZgbV4',
+        'teachweb': '104e4f1fdc632ca2e959ea671cb622f2b6ad759f',
+        'login_token': 'd4d07c7df1bfe49a1505aeca1907f8d73e36b5f3d7c69c671e5e97d9f2371d71',
+        'SERVERID': '98b6fea346cee1806c7dd0d9feae3405|1550991439|1550991405'}
     path = '//*[@class="interaction-row"]/@data-id'
     todo_urls = Toolbox(url, headers, cookies)
     urls = todo_urls.get_url(path)
