@@ -84,4 +84,4 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 注: 网址为您课程下题目集合的网址
 
-![demo](demo.png)
+![demo](pic/demo.png)
