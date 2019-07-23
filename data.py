@@ -50,8 +50,9 @@ def main():
                     break
                 except Exception as e:
                     time.sleep(5)
-                    print("\n" + e + "\n" + "#" * 20 +
-                          f" Retry {r + 1} " + "#" * 20 + "\n")
+                    print("\n")
+                    print(e)
+                    print("\n" + "#" * 20 + f" Retry {r + 1} " + "#" * 20 + "\n")
             try:
                 with open('Sum.txt', 'a+') as f:
                     for i in range(len(title)):

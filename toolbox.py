@@ -39,7 +39,6 @@ class Toolbox:
             self.url,
             headers=self.headers,
             timeout=500)
-        # print(r.text)
         html = etree.HTML(r.text)
         data_id = html.xpath(path)
         tit = html.xpath(title)
