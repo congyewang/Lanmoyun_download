@@ -47,7 +47,7 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9',
-    'Cookie': '_uab_collina=154280184098098822088961; UM_distinctid=165ea9955f7140-072e1f8bdbdb38-1130685c-fa000-165ea9955f8496; _ga=GA1.2.432290112.1544065307; CNZZDATA1253495893=230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1546938426; aliyungf_tc=AQAAAFkerBm/sggA9oGmezpKlyuZgbV4; login_token=d4d07c7df1bfe49a1505aeca1907f8d73e36b5f3d7c69c671e5e97d9f2371d71; teachweb=c4cf172269e447827a497e38dc7fe6f071346e58; SERVERID=98b6fea346cee1806c7dd0d9feae3405|1550992067|1550991405'
+    'Cookie': 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=F2768E3C-3F16-11E9-AAEB-7CD30AE4116C'
 }
 
 # Enable or disable spider middlewares

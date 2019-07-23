@@ -134,7 +134,7 @@ class Toolbox:
 
 if __name__ == '__main__':
     tic = time.time()
-    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=D654668D-8B2C-11E7-8560-7CD30ABC9F86'
+    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=F2768E3C-3F16-11E9-AAEB-7CD30AE4116C'
     headers = {
         'Host': 'www.mosoteach.cn',
         'Connection': 'keep-alive',
@@ -145,15 +145,13 @@ if __name__ == '__main__':
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'zh-CN,zh;q=0.9'}
 
-    cookies = {
-        '_uab_collina': '154280184098098822088961',
-        'UM_distinctid': '165ea9955f7140-072e1f8bdbdb38-1130685c-fa000-165ea9955f8496',
-        '_ga': 'GA1.2.432290112.1544065307',
-        'CNZZDATA1253495893': '230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1546938426',
-        'aliyungf_tc': 'AQAAAFkerBm/sggA9oGmezpKlyuZgbV4',
-        'teachweb': '104e4f1fdc632ca2e959ea671cb622f2b6ad759f',
-        'login_token': 'd4d07c7df1bfe49a1505aeca1907f8d73e36b5f3d7c69c671e5e97d9f2371d71',
-        'SERVERID': '98b6fea346cee1806c7dd0d9feae3405|1550991439|1550991405'}
+    cookies = {"_uab_collina=154280184098098822088961",
+               "_ga=GA1.2.432290112.1544065307",
+               "CNZZDATA1253495893=230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1546938426",
+               "login_token=7631f106b88fd948a4eb47ea9315b9a641a3ee79e755afa7ecb8fb315b94b246",
+               "aliyungf_tc=AQAAAIon6yFTxAQA6Ek6AazyizjklvIM",
+               "teachweb=5d85e9498d07da52a0aa394610b7e3cebedb11cc",
+               "SERVERID=98b6fea346cee1806c7dd0d9feae3405|1560239069|1560239022"}
     path = '//*[@class="interaction-row"]/@data-id'
     todo_urls = Toolbox(url, headers, cookies)
     urls = todo_urls.get_url(path)

@@ -1,48 +1,45 @@
 import requests
 from lxml import etree
 import re
-import difflib
-from fake_useragent import UserAgent
 
 
 class Toolbox:
 
-    def __init__(self, username: str, password: str, url: str, cookies=None):
-        self.login_url = 'https://www.mosoteach.cn/web/index.php?c=passport&m=account_login'
+    def __init__(self, username: str, password: str, url: str):
         self.url = url
         self.username = username
         self.password = password
         self.s = requests.Session()
         self.headers = {
             'Host': 'www.mosoteach.cn',
-            'Connection': 'keep-alive',
-            'Cache-Control': 'max-age=0',
-            'Upgrade-Insecure-Requests': '1',
-            'User-Agent': UserAgent().random,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'zh-CN,zh;q=0.9'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1500.55 Safari/537.36'
         }
-        self.cookies = cookies
 
-    def login(self):
+    def login(self) -> dict:
+        '''
+        To login and save the session before the next step which is to get urls.
+        return: To show the Status Code of this url. See details "https://www.restapitutorial.com/httpstatuscodes.html"
+        '''
+        login_url = "https://www.mosoteach.cn/web/index.php?c=passport&m=account_login"
         data = {
             "account_name": self.username,
             "user_pwd":  self.password,
             "remember_me": "N"
         }
-        sess = self.s.post(url=self.login_url, data=data,
+        sess = self.s.post(url=login_url, data=data,
                            headers=self.headers, timeout=500)
-        return dict(sess.cookies)
+        return sess.json()
 
-    def get_url(self, path: str, title: str) ->list:
+    def get_url(self) -> list:
+        path = '//*[@class="interaction-row"]/@data-id'
+        title = '//*[@class="interaction-row"]//@title'
         clazz_course_id = re.search('(clazz_course_id=).+', self.url).group().replace(
             'clazz_course_id=', '')
-        r = requests.get(
+        r = self.s.get(
             self.url,
             headers=self.headers,
-            cookies=self.cookies,
             timeout=500)
+        # print(r.text)
         html = etree.HTML(r.text)
         data_id = html.xpath(path)
         tit = html.xpath(title)
@@ -51,48 +48,10 @@ class Toolbox:
 
         return links, tit
 
-    def get_data(self, url: str, path: str) ->list:
-        r = requests.get(
+    def get_data(self, url: str) -> list:
+        r = self.s.get(
             url,
             headers=self.headers,
-            cookies=self.cookies,
-            timeout=500)
-        html = etree.HTML(r.text)
-        try:
-            result = html.xpath(path)
-        except Exception:
-            result = None
-        return result
-
-    def sort_que(s: str, mat: str) ->str:
-        pattern = re.compile(mat)
-        m = pattern.finditer(s)
-        old = []
-        new = []
-        for i in m:
-            old.append(i.group())
-            new.append('\n' + i.group())
-        for j in range(len(old)):
-            s = s.replace(old[j], new[j])
-        return s
-
-    def sort_ans(s: str, mat: str) ->str:
-        pattern = re.compile(mat)
-        m = pattern.finditer(s)
-        old = []
-        new = []
-        for i in m:
-            old.append(i.group())
-            new.append(i.group() + '\n')
-        for j in range(len(old)):
-            s = s.replace(old[j], new[j])
-        return s
-
-    def get_txt(self, url: str) ->list:
-        r = requests.get(
-            url,
-            headers=self.headers,
-            cookies=self.cookies,
             timeout=500)
         html = etree.HTML(r.text)
         title = []
@@ -100,32 +59,15 @@ class Toolbox:
         curr = []
         try:
             for i in range(len(html.xpath('/html/body/div[3]/div[2]/div[4]/div'))):
-                title.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[1]/div/div[3]/pre/text()'))
+                title.append(html.xpath(
+                    f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[1]/div/div[3]/pre/text()'))
                 ans = []
                 for j in range(len(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div'))):
-                    ans.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div[{j + 1}]/span[3]/text()'))
+                    ans.append(html.xpath(
+                        f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/div/div[3]/div[{j + 1}]/span[3]/text()'))
                 ans_sum.append(ans)
-                curr.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[2]/div[1]/div[1]/span/text()'))
+                curr.append(html.xpath(
+                    f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[2]/div[1]/div[1]/span/text()'))
         except Exception:
             pass
         return title, ans_sum, curr
-
-    def check_diff(n1: str, n2: str, choose='txt') -> str:
-        with open(n1, 'r') as f1:
-            s1 = f1.read()
-        with open(n2, 'r') as f2:
-            s2 = f2.read()
-        text1_line = s1.splitlines()
-        text2_line = s2.splitlines()
-        if choose == 'txt':
-            d = difflib.Differ()
-            a = d.compare(text1_line, text2_line)
-            a = list(a)
-            with open(f"diff.txt", "w+") as f:
-                f.write('\n'.join(list(a)))
-        elif choose == 'html':
-            d = difflib.HtmlDiff()
-            with open('diff.html', 'w+') as f:
-                f.write(d.make_file(text1_line, text2_line))
-        else:
-            print('choose value error, input "txt" or "html"')
