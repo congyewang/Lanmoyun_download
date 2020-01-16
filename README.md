@@ -54,6 +54,29 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 - **Lanmoyun_scrapy**框架已完善, 请先修改**start.py**中的`url`及`cookie`, 然后修改**Lanmoyun_scrapy**中的**settings.py**中的`DEFAULT_REQUEST_HEADERS`, 最后运行**start.py**文件
 
+- 刷答案方面，不建议用Python，因为对网页进行Javascript注入没有原生程序便捷。以多选题为例，下附Javascript代码:
+
+  ```javascript
+  # 选取多选题选项框
+  answer_list = document.getElementsByTagName("i")
+  # 判断总个数，并逐一选取
+  for(i=0;i<answer_list.length;i++) {answer_list[i].click()}
+  ```
+
+  若出现单选，则判断个数后用总数除以选项分组。为确保刷题的真实性，可添加随机选取，修改i++，用random()函数结合自身页面进行调整
+
+  用法:
+
+  以Chrome浏览器为例:
+
+  1. 单击右上角3个点
+
+  2. 单击更多工具
+
+  3. 单击**开发者工具**(注: 每个浏览器的开发者工具位置大体一致)
+
+  4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
+
 ----
 
 ## 已解决问题：
