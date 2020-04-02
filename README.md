@@ -4,45 +4,6 @@
 
 ---
 
-2020年4月2日检测结果:
-
-​        起初开发本程序只是方便本人和同学使用，为了便于存储分享与版本管理在Github上发布，未考虑太多关于兼容性的问题。
-
-​        由于受疫情影响，这段时间本程序使用人数也在增加，相应可能会出现部分未发现的问题，欢迎大家提交issue与修改Bug。因为本人为大四学生，现准备出国和毕业论文中，已经不用蓝墨云班课1年的时间。如果蓝墨云有api改动或者是其他问题，请提交后耐心等待，我会尽力尽快修改。另: 请各位联系是最好提交issue。因为今天查看邮箱，发现QQ邮件被自动归为垃圾邮件，所以可能会漏看消息或者是查看不及时，请各位谅解。
-
-​        关于exe使用问题: 本人电脑为`MacBookPro`，系统为`macOS Catalina 10.15.4 (19E266)`，测试用虚拟机为`Windows7`系统。所以可能在`Windows10`系统中出现未能复现的Bug，我将尽可能发布可用的exe版本。
-
-​        今日进行测试时，源码程序并未表现异常，**请使用时务必检查好您的运行环境。**
-
-测试结果: 
-
-1. 基于`requests`与`lxml`库程序表现: 
-
-![data](pic/Check/Check_data_py_2020_04_02_13.43.png)
-
-![Sum](pic/Check/Check_Sum_txt_2020_04_02_13.43.39.png)
-
-2. 基于`scrapy`框架爬虫表现:
-
-![start](pic/Check/Check_scrapy_start_2020_04_02_14.12.11.png)
-
-![Sum](pic/Check/Check_scrapy_data_2020_04_02_14.12.17.png)
-
-----
-## 目录
-- [Lanmoyun-download](#lanmoyun-download)
-  * [1 安装依赖](#1-安装依赖)
-  * [2 注意事项](#2-注意事项)
-  * [3 已解决问题](#3-已解决问题)
-  * [4 待解决问题](#4-待解决问题)
-  * [5 运行程序](#5-运行程序)
-  * [6 Scrapy框架使用](#6-Scrapy框架使用)
-    + [6.1 安装框架与依赖](#61-安装框架与依赖)
-    + [6.2 修改参数](#62-修改参数)
-    + [6.3 运行程序](#63-运行程序)
-
----
-
 本程序使用Python3.7.2编写
 
 请使用Python3.6及以上版本，若使用低版本请删去toolbox.py下Toolbox类中变量注释，并查看格式化`{}`方法是否适用于您的Python版本
@@ -73,7 +34,23 @@ title.append(html.xpath(f'/html/body/div[3]/div[2]/div[4]/div[{i + 1}]/div[1]/di
 title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1]/div/div[3]/pre/text()' % str(i + 1))
 ```
 
-----
+---
+
+## 目录
+- [Lanmoyun-download](#lanmoyun-download)
+  * [1 安装依赖](#1-安装依赖)
+  * [2 注意事项](#2-注意事项)
+  * [3 已解决问题](#3-已解决问题)
+  * [4 待解决问题](#4-待解决问题)
+  * [5 运行程序](#5-运行程序)
+  * [6 Scrapy框架使用](#6-Scrapy框架使用)
+    + [6.1 安装框架与依赖](#61-安装框架与依赖)
+    + [6.2 修改参数](#62-修改参数)
+    + [6.3 运行程序](#63-运行程序)
+  * [7 测试日志](#7-测试日志)
+    + [7.1 2020年4月2日检测结果](#71-2020年4月2日检测结果)
+
+---
 
 ## 1 安装依赖
 
@@ -109,11 +86,11 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
   以Chrome浏览器为例:
 
   1. 单击右上角3个点
-2. 单击更多工具
+  2. 单击更多工具
   3. 单击**开发者工具**(注: 每个浏览器的开发者工具位置大体一致)
-4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
+  4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
   
-- **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能光是下载就大概率出现不同的Bug**
+- **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能光是下载并安装就大概率出现不同的Bug**
 
 - 请提交issue时尽量附加错误代码
 
@@ -165,9 +142,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ### 6.2 修改参数
 
-1. 在PC端登陆您的蓝墨云，查看网站`cookie`。以Chrome为例：
-
-点击右上三个点 -> 更多工具 -> 开发者工具
+1. 在PC端登陆您的蓝墨云，查看网站`cookie`。以`Chrome`为例：点击右上**三个点** -> **更多工具** -> **开发者工具**
 
 ![Chrome](pic/Chrome.png)
 
@@ -175,7 +150,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ![Chrome](pic/Chrome_cookie.png)
 
-3. 根据第2步的Cookie修改Scrapy爬虫配置文件：
+3. 根据第2步的`Cookie`修改`Scrapy`爬虫配置文件：
 
 - 修改`Lanmoyun_scrapy/start.py`中`cookies`(**注意：此参数为Python中的dict类型数据结构**):
 
@@ -193,3 +168,36 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 运行完毕后查看`./Lanmoyun_scrapy/Sum.txt`即可，如需爬取其他页面题目，请确保`./Lanmoyun_scrapy/todo_urls.txt`为空。
 
+---
+
+## 7 测试日志
+
+### 7.1 2020年4月2日检测结果
+
+​        起初开发本程序只是方便本人和同学使用，为了便于存储分享与版本管理在Github上发布，未考虑太多关于兼容性的问题。
+
+​        由于受疫情影响，这段时间本程序使用人数也在增加，相应可能会出现部分未发现的问题，欢迎大家提交issue与修改Bug。因为本人为大四学生，现准备出国和毕业论文中，已经不用蓝墨云班课1年的时间。如果蓝墨云有api改动或者是其他问题，请提交后耐心等待，我会尽力尽快修改。另: 请各位联系是最好提交issue。因为今天查看邮箱，发现QQ邮件被自动归为垃圾邮件，所以可能会漏看消息或者是查看不及时，请各位谅解。
+
+​        关于exe使用问题: 本人电脑为`MacBookPro`，系统为`macOS Catalina 10.15.4 (19E266)`，测试用虚拟机为`Windows7`系统。所以可能在`Windows10`系统中出现未能复现的Bug，我将尽可能发布可用的exe版本。
+
+​        今日进行测试时，源码程序未表现异常，二进制可执行文件未表现异常，均可正常使用。**请使用时务必检查好您的运行环境。**
+
+**测试结果:** 
+
+1. 基于`requests`与`lxml`库程序表现: 
+
+![data](pic/Check/Check_data_py_2020_04_02_13.43.png)
+
+![Sum](pic/Check/Check_Sum_txt_2020_04_02_13.43.39.png)
+
+2. 基于`scrapy`框架爬虫表现:
+
+![start](pic/Check/Check_scrapy_start_2020_04_02_14.12.11.png)
+
+![Sum](pic/Check/Check_scrapy_data_2020_04_02_14.12.17.png)
+
+3. 二进制可执行文件:
+
+![Sum](pic/Check/Check_exe_2020_04_02_17.19.23.png)
+
+![Sum](pic/Check/Check_exe_Sum_2020_04_02_17.20.00.png)
