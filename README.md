@@ -90,23 +90,25 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
   3. 单击**开发者工具**(注: 每个浏览器的开发者工具位置大体一致)
   4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
   
-- **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能光是下载并安装就大概率出现不同的Bug**
+- **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能即便是下载并安装就大概率出现不同的Bug**
 
 - 请提交issue时尽量附加错误代码
+
+- 在`issue#4`中发现`Windows10`需要以管理员身份运行`exe`程序，请**右键单击程序**，选择**以管理员身份运行**。
 
 ----
 
 ## 3 已解决问题
 
-1. 批量爬取蓝墨云班课活动
+ * [x] 批量爬取蓝墨云班课活动
 
-2. 题目统一编号整理后写入统一文档--v2.0
+ * [x] 题目统一编号整理后写入统一文档--v2.0
 
-3. Session会话管理--v2.1
+ * [x] Session会话管理--v2.1
 
-6. tqdm加入进度条
+ * [x] tqdm加入进度条
 
-7. 完善Lanmoyun_scrapy
+ * [x] 完善Lanmoyun_scrapy
 
 ----
 
@@ -196,7 +198,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ![Sum](pic/Check/Check_scrapy_data_2020_04_02_14.12.17.png)
 
-3. 二进制可执行文件:
+3. 二进制可执行文件表现:
 
 ![Sum](pic/Check/Check_exe_2020_04_02_17.19.23.png)
 
