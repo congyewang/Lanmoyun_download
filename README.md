@@ -2,7 +2,37 @@
 
 批量爬取蓝墨云班课中的习题
 
+---
+
+2020年4月2日检测结果:
+
+​        起初开发本程序只是方便本人和同学使用，为了便于存储分享与版本管理在Github上发布，未考虑太多关于兼容性的问题。
+
+​        由于受疫情影响，这段时间本程序使用人数也在增加，相应可能会出现部分未发现的问题，欢迎大家提交issue与修改Bug。因为本人为大四学生，现准备出国和毕业论文中，已经不用蓝墨云班课1年的时间。如果蓝墨云有api改动或者是其他问题，请提交后耐心等待，我会尽力尽快修改。另: 请各位联系是最好提交issue。因为今天查看邮箱，发现QQ邮件被自动归为垃圾邮件，所以可能会漏看消息或者是查看不及时，请各位谅解。
+
+​        关于exe使用问题: 本人电脑为`MacBookPro`，系统为`macOS Catalina 10.15.4 (19E266)`，测试用虚拟机为`Windows7`系统。所以可能在`Windows10`系统中出现未能复现的Bug，我将尽可能发布可用的exe版本。
+
+​        今日进行测试时，源码程序并未表现异常，**请使用时务必检查好您的运行环境。**
+
+测试结果: 
+
+1. 基于`requests`与`lxml`库程序表现: 
+
+![data](pic/Check/Check_data_py_2020_04_02_13.43.png)
+
+![Sum](pic/Check/Check_Sum_txt_ 2020_04_02_13.43.39.png)
+
+2. 基于`scrapy`框架爬虫表现:
+
+![start](pic/Check/Check_scrapy_start_2020_04_02_14.12.11.png)
+
+![Sum](pic/Check/Check_scrapy_data_2020_04_02_14.12.17.png)
+
 ----
+
+[TOC]
+
+---
 
 本程序使用Python3.7.2编写
 
@@ -36,7 +66,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ----
 
-## 安装依赖：
+## 1 安装依赖
 
 `pip install requests`
 
@@ -46,7 +76,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ----
 
-## 注意事项
+## 2 注意事项
 
 - 本程序默认自动重连次数为10次(`for r in range(10):`)，重连等待时间为5秒(`time.sleep(5)`)，爬取网页等待时间为2秒(`time.sleep(2)`)，文件为程序所在目录下的**Sum.txt**(`with open('Sum.txt', 'a+') as f:`)。如需修改请在**data.py**文件中添加您需要的数值
 
@@ -70,16 +100,17 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
   以Chrome浏览器为例:
 
   1. 单击右上角3个点
-
-  2. 单击更多工具
-
+2. 单击更多工具
   3. 单击**开发者工具**(注: 每个浏览器的开发者工具位置大体一致)
+4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
+  
+- **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能光是下载就大概率出现不同的Bug**
 
-  4. 单击Console后输入javascript代码(注: Firefox浏览器为**控制台**)
+- 请提交issue时尽量附加错误代码
 
 ----
 
-## 已解决问题：
+## 3 已解决问题
 
 1. 批量爬取蓝墨云班课活动
 
@@ -93,18 +124,63 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 ----
 
-## 待解决问题：
+## 4 待解决问题
 
 1.将题目以首字母拼音升序排列(拟用pypinyin库构建)
 
 2.改用asyncio + aiohttp + ThreadPoolExecutor进行高并发多线程爬取
 
-## 运行程序
+## 5 运行程序
 
-`python main.py`
+`python data.py`
 
 按照终端提示依次输入用户名、密码及网址
 
 注: 网址为您课程下题目集合的网址
 
 ![demo](pic/demo.png)
+
+## 6 Scrapy框架使用
+
+本程序分两个部分，`data.py`和`toolbox.py`文件为`requests`库与`lxml`库构建程序，与`Lanmoyun_scrapy`文件夹所构建的`scrapy`框架爬虫无关。试验`scrapy`程序是出于本人对于其速度的好奇，若新手使用建议进行步骤1-5的操作。如果喜欢折腾框架，欢迎按照一下步骤操作:
+
+### 6.1 安装框架与依赖
+
+`pip install scrapy`
+
+`pip install requests`
+
+`pip install lxml`
+
+如果需要其他安装方式，请参阅[Scrapy官方使用手册](https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/install.html)
+
+### 6.2 修改参数
+
+1. 在PC端登陆您的蓝墨云，查看网站`cookie`。以Chrome为例：
+
+点击右上三个点 -> 更多工具 -> 开发者工具
+
+![Chrome](pic/Chrome.png)
+
+2. 点击`Network`，找到所在页面并点击，查看`Headers`，下拉寻找`Cookie`
+
+![Chrome](pic/Chrome_cookie.png)
+
+3. 根据第2步的Cookie修改Scrapy爬虫配置文件：
+
+- 修改`Lanmoyun_scrapy/start.py`中`cookies`(**注意：此参数为Python中的dict类型数据结构**):
+
+![scrapy_cookie_1](pic/scrapy_cookie_1.png)
+
+- 修改`Lanmoyun_scrapy/Lanmoyun_scrapy/settings.py`中`Cookie`**(注意：此参数为Python中的str类型数据结构**)
+
+![scrapy_cookie_2](pic/scrapy_cookie_2.png)
+
+### 6.3 运行程序
+
+`python ./Lanmoyun_scrapy/start.py`
+
+
+
+运行完毕后查看`./Lanmoyun_scrapy/Sum.txt`即可，如需爬取其他页面题目，请确保`./Lanmoyun_scrapy/todo_urls.txt`为空。
+

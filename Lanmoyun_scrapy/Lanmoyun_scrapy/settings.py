@@ -15,7 +15,8 @@ SPIDER_MODULES = ['Lanmoyun_scrapy.spiders']
 NEWSPIDER_MODULE = 'Lanmoyun_scrapy.spiders'
 
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
+# Crawl responsibly by identifying yourself (and your website) on the
+# user-agent
 USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36'
 
 # Obey robots.txt rules
@@ -47,24 +48,24 @@ DEFAULT_REQUEST_HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'zh-CN,zh;q=0.9',
-    'Cookie': 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=F2768E3C-3F16-11E9-AAEB-7CD30AE4116C'
+    'Cookie': '_uab_collina=158556550384322737696212; acw_tc=707c9f9815855655032048541e1acf857920e24b3734dc50b3e1b6926afc49; login_token=93d164c16731f0659aa9fd12ac70022985446a89508874d78618078c3264d078; teachweb=96a85ad37f2813053f219271099baf0e9caefb1b; SERVERID=274ef423fd4a3692c145fd7788074212|1585807145|1585807125'
 }
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-#SPIDER_MIDDLEWARES = {
+# SPIDER_MIDDLEWARES = {
 #    'Lanmoyun_scrapy.middlewares.LanmoyunScrapySpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'Lanmoyun_scrapy.middlewares.LanmoyunScrapyDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
 #}
 

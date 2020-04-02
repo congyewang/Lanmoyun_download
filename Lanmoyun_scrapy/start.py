@@ -7,11 +7,13 @@ import time
 
 
 class RunSpiders:
+
     def RunCommand(self, spider):
         os.system(f"scrapy crawl {spider}")
 
 
 class Toolbox:
+
     def __init__(self, url: str, headers: dict, cookies: dict):
         self.url = url
         self.headers = headers
@@ -134,7 +136,7 @@ class Toolbox:
 
 if __name__ == '__main__':
     tic = time.time()
-    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=F2768E3C-3F16-11E9-AAEB-7CD30AE4116C'
+    url = 'https://www.mosoteach.cn/web/index.php?c=interaction&m=index&clazz_course_id=D654668D-8B2C-11E7-8560-7CD30ABC9F86'
     headers = {
         'Host': 'www.mosoteach.cn',
         'Connection': 'keep-alive',
@@ -145,13 +147,11 @@ if __name__ == '__main__':
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept-Language': 'zh-CN,zh;q=0.9'}
 
-    cookies = {"_uab_collina=154280184098098822088961",
-               "_ga=GA1.2.432290112.1544065307",
-               "CNZZDATA1253495893=230301430-1537237385-https%253A%252F%252Fwww.google.com%252F%7C1546938426",
-               "login_token=7631f106b88fd948a4eb47ea9315b9a641a3ee79e755afa7ecb8fb315b94b246",
-               "aliyungf_tc=AQAAAIon6yFTxAQA6Ek6AazyizjklvIM",
-               "teachweb=5d85e9498d07da52a0aa394610b7e3cebedb11cc",
-               "SERVERID=98b6fea346cee1806c7dd0d9feae3405|1560239069|1560239022"}
+    cookies = {"_uab_collina": "158556550384322737696212",
+               "acw_tc": "707c9f9815855655032048541e1acf857920e24b3734dc50b3e1b6926afc49",
+               "login_token": "93d164c16731f0659aa9fd12ac70022985446a89508874d78618078c3264d078",
+               "teachweb": "96a85ad37f2813053f219271099baf0e9caefb1b",
+               "SERVERID": "274ef423fd4a3692c145fd7788074212|1585807145|1585807125"}
     path = '//*[@class="interaction-row"]/@data-id'
     todo_urls = Toolbox(url, headers, cookies)
     urls = todo_urls.get_url(path)
