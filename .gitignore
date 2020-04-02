@@ -107,6 +107,6 @@ venv.bak/
 .DS_Store
 
 #file
-.txt
-.csv
+*.txt
+*.csv
 Lanmoyun_scrapy/*.txt

@@ -20,7 +20,7 @@
 
 ![data](pic/Check/Check_data_py_2020_04_02_13.43.png)
 
-![Sum](pic/Check/Check_Sum_txt_ 2020_04_02_13.43.39.png)
+![Sum](pic/Check/Check_Sum_txt_2020_04_02_13.43.39.png)
 
 2. 基于`scrapy`框架爬虫表现:
 
