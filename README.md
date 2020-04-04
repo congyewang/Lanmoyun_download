@@ -66,7 +66,7 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 
 - 本程序默认自动重连次数为10次(`for r in range(10):`)，重连等待时间为5秒(`time.sleep(5)`)，爬取网页等待时间为2秒(`time.sleep(2)`)，文件为程序所在目录下的**Sum.txt**(`with open('Sum.txt', 'a+') as f:`)。如需修改请在**data.py**文件中添加您需要的数值
 
-- 本程序已构建可执行.exe文件，Windows平台可直接下载运行
+- 本程序已构建可执行.exe文件，Windows平台可直接下载运行。在[`issue#4`](https://github.com/congyewang/Lanmoyun_download/issues/4)中初步发现`Windows10`需要以管理员身份运行`exe`程序，请**右键单击程序**，选择**以管理员身份运行**。
 
 - **Lanmoyun_scrapy**框架已完善, 请先修改**start.py**中的`url`及`cookie`, 然后修改**Lanmoyun_scrapy**中的**settings.py**中的`DEFAULT_REQUEST_HEADERS`, 最后运行**start.py**文件
 
@@ -93,8 +93,6 @@ title.append(html.xpath('/html/body/div[3]/div[2]/div[4]/div[%]/div[1]/div/div[1
 - **请小白同学们尽量使用第一种爬虫程序，`Scrapy`框架可能即便是下载并安装就大概率出现不同的Bug**
 
 - 请提交issue时尽量附加错误代码
-
-- 在`issue#4`中发现`Windows10`需要以管理员身份运行`exe`程序，请**右键单击程序**，选择**以管理员身份运行**。
 
 ----
 
